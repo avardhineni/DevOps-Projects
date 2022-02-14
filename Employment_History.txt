@@ -1,0 +1,30 @@
+Aster Minds Enterprise Solutions Pvt. Ltd. Hyderabad,
+Date: May 2014 – February 2015
+Position: Messaging Server Consultant
+Job Profile: Exchange & O365 Migration
+Client: Microsoft, Bangalore (C2H)
+
+McAfee Inc.: Exchange Server Migration
+
+1.	Created detailed planning, procedures, and documentation.
+2.	Migration of 14,000 mailboxes from Exchange 2010 to Exchange 2013 including user accounts.
+3.	Scheduling the migration of the users, performing pre-validation assessment and assisting the users with the migration.
+4.	Used PowerShell scripting to automate the process of migration.
+5.	Assist the user’s issues through the Remedy Ticketing Tool and following up with the users till the issue is resolved. 
+6.	Communicating with the users and educate them with the technical terms about the migration process. 
+
+Zenith InfoTech Pvt. Ltd. Mumbai,
+Date: July 2012 – May 2014
+Position: Server Engineer (L3)
+Job Profile: Exchange Server Administration 
+
+1.	Providing tier 2 and 3 troubleshooting support of Exchange issues, investigating user escalations, finding optimum solutions for both users and the company.
+2.	Responsible for Exchange 2010, 2003, Windows server 2008, 2003 AD administration and maintenance in a multi-site environment.
+3.	Managed Configuration and Troubleshooting of Exchange Server 2010 with Mailbox server role, Hub Transport Server role, Client Access Server roles.
+4.	Managed DAG, CAS Array and transport rules.
+5.	Managed messaging environment with Exchange Server 2010. Outlook Web App (OWA) access issue, active sync, Outlook, and outlook anywhere.
+6.	Mail quota, delegation, and individual mail restore according to IT policies.
+7.	Performance tuning and optimization of Exchange Server for maximum performance.
+8.	Troubleshooting & Administration of Mail Routing / Mail Flow and Monitoring Queues on Exchange Server, configured alerts and performing Offline Defrag on databases.
+9.	Monitor the Mail Server for health. - Disk space, CPU, RAM, Queues, and Backup.
+10.	Extensively used PowerShell scripts for various administrative activities.
