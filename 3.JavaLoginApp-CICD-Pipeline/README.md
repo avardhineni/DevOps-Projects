@@ -16,6 +16,7 @@ Below image depicts the overview of the CI/CD Pipeline.
 But, having the CI & CD pipelines combined is not a best practice. As a best practice, I will split the Pipeline into 2 pipelines, one for CI Pipeline and other for CD pipeline. 
 
 CI Pipeline
+-----------
 
 <img src="images/ci-pipeline.png" width="800">
 
@@ -26,6 +27,7 @@ CI Pipeline
 5. The helm charts are again pushed to JFrog artifactory. 
 
 CD Pipeline
+-----------
 
 <img src="images/cd-pipeline.png" width="800">
 
@@ -35,3 +37,24 @@ CD Pipeline
 4. The pipeline will fetch the required files from the bit bucket for each environment type and go to artifactory to download the helm charts and apply the values from values.yaml file at the time of deployment to specific environment. 
 
 In this entire process, CI pipeline job will run one time and CD pipeline job will run 4 times as per the environment type. The pipeline will not deploy in all the environment at once. At first the code is deployed in to Dev environment. After the validation and approvals, the code is deployed into QA environment. Again after the validation and approvals the same process will continue till deployment into Production environment. 
+
+All the above configurations is specified in the Jenkinsfile in the declarative way.
+
+Implementation of CI/CD Pipelines
+=================================
+
+Phase 1: Planning 
+-----------------
+
+A. Planning Tools
+
+<img src="images/planning-tools.png" width="800">
+
+At first, before implementing planning is very important.
+
+1. I need to identify what are the tools I need to configure in the Jenkins server to implement CI/CD pipelines. 
+2. For CI pipeline I need to install JDK,Maven,Git. 
+3. For configuring SonarQube and JFrog nothing has to be installed, All the commands are run from Maven.
+4. For CD pipelines I need to install Ansible,Docker,Kubectl,Helm.
+
+As of now I am installing all these tools in Jenkins control node. If using Jenkins Agent, I need to make sure that all these components are installed in each slave node.
