@@ -2,7 +2,7 @@ This Project is an complete CI/CD Automation Project.
 
 I'm using Jenkins to automate Build & Deployment Pipelines also called as CI & CD Pipelines.
 
-Below image depicts the overview of the CI/CD Pipeline.
+Below image depicts the overview of the CI/CD Pipeline Project.
 
 <img src="images/cicd-pipeline.png" width="800">
 
