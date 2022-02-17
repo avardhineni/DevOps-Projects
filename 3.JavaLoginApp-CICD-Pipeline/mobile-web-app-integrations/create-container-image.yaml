@@ -33,7 +33,7 @@
     
   - name: Push to docker hub
     docker_image:
-      name: iwayq
+      name: javalogin
       repository: docker.io/avardhineni7/javalogin:1.0
       push: yes
       source: local

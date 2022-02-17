@@ -1,0 +1,23 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javalogin-deploy
+  namespace: dev
+  labels:
+    app: javalogin-app
+spec:
+  replicas: {{ .values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: javalogin-app
+  template:
+    metadata:
+      labels:
+        app: javalogin-app
+    spec:
+      containers:
+      - name: javalogin-container
+        image: docker.io/avardhineni7/javalogin:1.0
+        ports:
+        - containerPort: 8080
