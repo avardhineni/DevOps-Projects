@@ -105,7 +105,8 @@ Execution of CI/CD Pipeline
 6. Once the plugins are installed, need to store the credentials for GIT, Sonar Token, & JFrog under Credentials Manager in Jenkins Server. 
 7. I also need to edit the pom.xml file with SonarCloud properties and  
 8. Now create the Dockerfile. In the Dockerfile, it will get the lastest tomcat image from the docker registry and copy my customized .war file to tomcat webapps folder and create an image out of it. 
-9. 
+9. Create the Ansible playbook to automate the container image. In the Ansible playbook, the 1st task is to pull the artifact from the JFrog, 2nd task is to rename the .war file to simple name, 3rd task is to perform the build process to create the docker image, 4th task is to login to the docker hub, and final task is to push the image into the docker hub.
+10. 
 
 
 
