@@ -9,7 +9,7 @@ pipeline {
 
       stage ('Checkout SCM'){
         steps {
-          checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://iwayqtech@bitbucket.org/iwayqtech/mobile-web-app-integrations.git']]])
+          checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://SimplifiedDevOps@bitbucket.org/simplifieddevops/devopsdashboard.git']]])
         }
       }
 	  
@@ -39,15 +39,15 @@ pipeline {
             steps {
                 rtServer (
                     id: "jfrog",
-                    url: "https://iwayqweb.jfrog.io/artifactory",
+                    url: "https://simplifieddevops.jfrog.io/artifactory",
                     credentialsId: "jfrog"
                 )
 
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "jfrog",
-                    releaseRepo: "mobile",
-                    snapshotRepo: "mobile"
+                    releaseRepo: "javalogin",
+                    snapshotRepo: "javalogin"
                 )
 
                 rtMavenResolver (
@@ -89,9 +89,9 @@ pipeline {
     stage('Build Helm Charts') {
             
             steps {
-              dir('charts') {
+              dir('helmcharts') {
              sh "/usr/local/bin/helm package mobile-web-app"
-					   sh "sudo /usr/local/bin/helm push-artifactory --username prreddy1986@gmail.com --password mko09ijN mobile-web-app-0.0.1.tgz https://iwayqweb.jfrog.io/artifactory/mobile-helm-local"
+					   sh "sudo /usr/local/bin/helm push-artifactory --username avardhineni7@gmail.com --password mko09ijN mobile-web-app-0.0.1.tgz https://simplifieddevops.jfrog.io/artifactory/mobile-helm-local"
 					  }
           }
             
