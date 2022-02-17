@@ -6,7 +6,7 @@ Below image depicts the overview of the CI/CD Pipeline.
 
 <img src="images/cicd-pipeline.png" width="800">
 
-1. Developer commit the code to the Bit Bucket repository in the respective branches.
+1. Developer commits the code to the Bit Bucket repository in the respective branches.
 2. Once the code is approved and merged to specific branch, The role of DevOps engineer will start. 
 3. Jenkins acts as a DevOps engineer and performs build and deployment. All I have to do is configure the Jenkins Server with correct configurations.
 4. Jenkins will take the code from Bit Bucket, do the Maven build, push the code for SonarQube analysis, once the quality gate is passed, the artifact will be pushed to JFrog artifactory. 
@@ -48,7 +48,7 @@ Phase 1: Planning
 
 A. Planning Tools
 
-<img src="images/planning-tools.png" width="800">
+<img src="images/planning-tools.png" width="600">
 
 At first, before implementing planning is very important.
 
