@@ -104,6 +104,8 @@ Execution of CI/CD Pipeline
 5. I have installed Jenkins plugins as mentioned above after installing all the tools. 
 6. Once the plugins are installed, need to store the credentials for GIT, Sonar Token, & JFrog under Credentials Manager in Jenkins Server. 
 7. I also need to edit the pom.xml file with SonarCloud properties and  
+8. Now create the Dockerfile. In the Dockerfile, it will get the lastest tomcat image from the docker registry and copy my customized .war file to tomcat webapps folder and create an image out of it. 
+9. 
 
 
 
