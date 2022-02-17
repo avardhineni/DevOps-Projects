@@ -95,6 +95,17 @@ Ideally, while planning for Automation, At first I need to execute it manually a
 5. Now, in order to inform Jenkins to execute the steps in orderly manner, I need to provide Jenkinsfile with all the instructions discussed above in a loosely coupled manner (Stages) i.e. a declarative pipeline.
 
 
+Execution of CI/CD Pipeline
+===========================
+1. At first login to the Jenkins and make sure all the tools are installed. 
+2. While installing kubectl, I have to make sure that it is pointing to kubernetes control plane API server. 
+3. After installing Helm, I also need to install plugin "Plugin-Artifactory" so that helm charts can be pushed to JFrog artifactory.
+4. Currently I am preparing the infrastructure part. This can also be done through Terraform or Ansible. In this project, I am not doing Infrastructure automations, as I have already done Infrastructure automation in the 1st project, at present main focus is on Application automation. 
+5. I have installed Jenkins plugins as mentioned above after installing all the tools. 
+6. Once the plugins are installed, need to store the credentials for GIT, Sonar Token, & JFrog under Credentials Manager in Jenkins Server. 
+7. I also need to edit the pom.xml file with SonarCloud properties and  
+
+
 
 
 
