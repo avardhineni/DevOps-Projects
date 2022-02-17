@@ -55,6 +55,68 @@ At first, before implementing planning is very important.
 1. I need to identify what are the tools I need to configure in the Jenkins server to implement CI/CD pipelines. 
 2. For CI pipeline I need to install JDK, Maven, Git. 
 3. For configuring SonarQube and JFrog nothing has to be installed, All the commands are ran from Maven.
-4. For CD pipelines I need to install Ansible, Docker,Kubectl, Helm.
+4. For CD pipelines I need to install Ansible, Docker, Docker_py, Kubectl, Helm.
 
 As of now I am installing all these tools in Jenkins control node. If using Jenkins Agent, I need to make sure that all these components are installed in each slave node.
+
+B. Planning for Credentials
+
+<img src="images/Planning-Creds.png" width="500">
+
+I have to supply the required credentials to Jenkins to authenticate with different tools. 
+I need to provide credentials for 
+1. BitBucket 
+2. SonarQube Token 
+3. Jfrog 
+4. Docker Hub Registry (Ansible) 
+
+C. Planning for Jenkins Plugins
+
+<img src="images/Planning-Plugins.png" width="500">
+
+The Plugins need to be configured are
+1. Git/Maven (Already Installed)
+2. Sonar 
+3. Jfrog artifactory
+
+Depending on my project scenario, I am not installing Ansible plugin as I need Ansible to run a playbook file.
+
+D. Planning for Configuration files
+
+<img src="images/Planning-conf-files.png" width="600">
+
+1. I need to provide Ansible playbook to Jenkins, so that it can fetch the artifact from Jfrog artifactory and creating the docker image and push it to docker hub registry.
+2. I need to provide a Dockerfile to Ansible Playbook, the playbook will use the Dockerfile so that it can create an docker image. The Dockerfile will point to the artifact that it had to load while creating the image. 
+3. I need to provide the Kubernetes deployment, service manifest files to helm in the specified helm directed hierarchy. The manifest files are variabilize and data is fetched from values.yaml file.
+4. All the above configuration files along with Source Code (already committed by Developer) has to be committed to bitbucket repository used for CI Pipeline. 
+
+Ideally, while planning for Automation, At first I need to execute it manually and identify the requirements. Once I identified the dependencies, ran the steps manually, then start Automating the process.  
+
+5. Now, in order to inform Jenkins to execute the steps in orderly manner, I need to provide Jenkinsfile with all the instructions discussed above in a loosely coupled manner (Stages) i.e. a declarative pipeline.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
