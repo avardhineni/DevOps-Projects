@@ -21,9 +21,10 @@ pipeline {
           
            dir("iwayq-web-app"){
                     sh 'pwd'
-                    sh "sudo /usr/local/bin/helm repo add iwayq-local https://simplifieddevops.jfrog.io/artifactory/javappweb-local --username prreddy1986@gmail.com --password mko09ijN"
+                    sh 'ls -l'
+                    sh "sudo /usr/local/bin/helm repo add iwayq-local https://simplifieddevops.jfrog.io/artifactory/javappweb-local --username avardhineni7@gmail.com --password mko09ijN"
                     sh "sudo /usr/local/bin/helm repo update"
-                    sh "sudo /usr/local/bin/helm upgrade iwayq-web-app-${environ} --install --namespace ${namespace}  --force ."
+                    sh "sudo /usr/local/bin/helm upgrade iwayq-web-app-${environ} --install -f values.yaml --namespace ${namespace}  --force ."
                     sh "sudo /usr/local/bin/helm list -a --namespace ${namespace}"
                 }
         }

@@ -46,7 +46,7 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "jfrog",
-                    releaseRepo: "javalogin",
+                    releaseRepo: "javalogin-libs-release-local",
                     snapshotRepo: "javalogin"
                 )
 
@@ -90,8 +90,8 @@ pipeline {
             
             steps {
               dir('helmcharts') {
-             sh "/usr/local/bin/helm package mobile-web-app"
-					   sh "sudo /usr/local/bin/helm push-artifactory --username avardhineni7@gmail.com --password mko09ijN mobile-web-app-0.0.1.tgz https://simplifieddevops.jfrog.io/artifactory/mobile-helm-local"
+             sh "/usr/bin/helm package mobile-web-app"
+					   sh "sudo /usr/bin/helm push-artifactory --username avardhineni7@gmail.com --password mko09ijN mobile-web-app-0.0.1.tgz https://simplifieddevops.jfrog.io/artifactory/mobile-helm-local"
 					  }
           }
             
