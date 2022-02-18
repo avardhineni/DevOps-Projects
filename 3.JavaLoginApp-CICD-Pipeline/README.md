@@ -164,5 +164,7 @@ Phase 3: Execution of CD Pipeline
 
 13. In case of any code change, only the CI Pipeline will run. CD Pipeline will not run. CD Pipeline can be also called as single click deployment. Once I get a callout to run the Dev CD Pipeline, development team will available to validate and if it is successfull, I will get a callout to run QA CD Pipeline after taking neccessary approvals. QA team will validate the deployment and the same is repeated till the application is deployed into the Production environment. 
 
+14. This is one of the method to implement CI/CD Pipelines to deploy an application. There are many other methods, it all depends on the project, technology stack that we are selecting and many other factors. Our end goal should be to deploy an application that has High Availability, Scalability etc.
+
 Thank You
 ----------
