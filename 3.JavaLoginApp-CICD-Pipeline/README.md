@@ -95,7 +95,7 @@ Ideally, while planning for Automation, At first I need to execute it manually a
 5. Now, in order to inform Jenkins to execute the steps in orderly manner, I need to provide Jenkinsfile with all the instructions discussed above in a loosely coupled manner (Stages) i.e. a declarative pipeline.
 
 
-Execution of CI/CD Pipeline
+Execution of CI Pipeline
 ===========================
 1. At first login to the Jenkins and make sure all the tools are installed. 
 2. While installing kubectl, I have to make sure that it is pointing to kubernetes control plane API server. 
@@ -103,10 +103,48 @@ Execution of CI/CD Pipeline
 4. Currently I am preparing the infrastructure part. This can also be done through Terraform or Ansible. In this project, I am not doing Infrastructure automations, as I have already done Infrastructure automation in the 1st project, at present main focus is on Application automation. 
 5. I have installed Jenkins plugins as mentioned above after installing all the tools. 
 6. Once the plugins are installed, need to store the credentials for GIT, Sonar Token, & JFrog under Credentials Manager in Jenkins Server. 
-7. I also need to edit the pom.xml file with SonarCloud properties and  
+7. I also need to edit the pom.xml file by adding SonarCloud properties and distribution management settings of JFrog. 
 8. Now create the Dockerfile. In the Dockerfile, it will get the lastest tomcat image from the docker registry and copy my customized .war file to tomcat webapps folder and create an image out of it. 
-9. Create the Ansible playbook to automate the container image. In the Ansible playbook, the 1st task is to pull the artifact from the JFrog, 2nd task is to rename the .war file to simple name, 3rd task is to perform the build process to create the docker image, 4th task is to login to the docker hub, and final task is to push the image into the docker hub.
-10. 
+9. Create the Ansible playbook to automate the container image. In the Ansible playbook, the 1st task is to pull the artifact from the JFrog, 2nd task is to rename the .war file to simple name, 3rd task is to perform the build process to create the docker image, the path to fetch the Dockerfile is pwd, 4th task is to login to the docker hub, and final task is to push the image into the docker hub.
+10. Create the deployment and service manifest files for helm charts. These files are available helm charts folder as helm designated folder structure. The values are variabilized to support various environment types. 
+11. Now before creating Jenkinsfile, I need to perform tool configuration by supplying the endpoints of maven, sonarqube, Jfrog by navigating to Configure System under Manage Jenkins. Maven configuration can be found in Global tool configuration. 
+12. Create the Jenkins file with various stages in it.
+    Stage 1: Performs the Git clone process. The code will come to build server.
+    Stage 2: Build Stage, here I am running mvn package command from the folder java-source as it has source code and pom.xml file.
+    Stage 3: The next stage is related to SonarQube code analysis. 
+    Stage 4: It is related to JFrog configurations. 
+    Stage 5: This stage is publishing build information. 
+    Stage 6: This stage will run the Ansible Playbook to create the docker image and push the image to docker hub. 
+    Stage 7: The last stage is to prepare the helm charts. I am running the helm package commands from helmcharts folder. This will create the helm charts and to publish the         helm charts to jfrog artifactory mentioned the command helm push-artifactory. Also create another repository to hold the helm charts. 
+13. Now in the Jenkins server, create a new Pipeline job. Provide the Jenkinsfile path in the Pipeline script from SCM. 
+
+<img src="images/Pipeline.png" width="600">
+
+     Jenkins server will go to this repository, get the code from master branch and look for Jenkinsfile and start execute it. 
+     
+14. In order to trigger the job automatically, I can configure webhook or poll scm option. This will also trigger automatically whenever there is a change in code as well. As of now I am running the Pipeline job manually. 
+15. And my first build job failed and digging into details to check why it got failed.
+16. I found a small typo in the Jenkinsfile, corrected it and running the pipeline job again.
+
+<img src="images/pipeline-view.png" width="600">
+
+<img src="images/stageview.png" width="600">
+
+17. And again the build is failed at the Deploy Artifact stage. It is not able to publish the artifact to JFrog artifactory eventhough the maven build is successfull. 
+18. To troubleshoot this I will run this step manually to isolate the issue.
+
+
+Execution of CD Pipeline
+===========================
+1. At first create a seperate repository for CD pipeline and create branch for each environment type for eg. Dev, QA, Perf, PROD.
+2. In this repository I need to have values.yaml file and Jenkinsfile. In the values.yaml file, I need to provide values for each environment type.
+3. In the Deployment Jenkinsfile, at first defining the variables like label, namespace, environm and has two stages. 
+4. In the 1st stage, I am cloning the deployment repository and getting the data from Dev branch as it has the values.yaml file for Dev environment specifications.
+5. In the 2nd stage, I am calling out helm commands to perform the actual deployment such as helm repo add, helm repo update, helm upgrade.
+6. Simillarly, I need to have the pipeline code for other environments as well. 
+7. Now, create a Multibranch Pipeline to run the CD Pipeline as it has multiple branches. It will scan all the branches present in the repository, get the Jenkinsfile and perform the deployment. 
+
+
 
 
 
