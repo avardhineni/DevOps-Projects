@@ -95,8 +95,8 @@ Ideally, while planning for Automation, At first I need to execute it manually a
 5. Now, in order to inform Jenkins to execute the steps in orderly manner, I need to provide Jenkinsfile with all the instructions discussed above in a loosely coupled manner (Stages) i.e. a declarative pipeline.
 
 
-Execution of CI Pipeline
-===========================
+Phase 2: Execution of CI Pipeline
+---------------------------------
 1. At first login to the Jenkins and make sure all the tools are installed. 
 2. While installing kubectl, I have to make sure that it is pointing to kubernetes control plane API server. 
 3. After installing Helm, I also need to install plugin "Plugin-Artifactory" so that helm charts can be pushed to JFrog artifactory.
@@ -131,18 +131,41 @@ Execution of CI Pipeline
 <img src="images/stageview.png" width="600">
 
 17. And again the build is failed at the Deploy Artifact stage. It is not able to publish the artifact to JFrog artifactory eventhough the maven build is successfull. 
-18. To troubleshoot this I will run this step manually to isolate the issue.
+18. To troubleshoot this I will run this step manually to isolate the issue. 
+19. After troubleshooting for a while, I have found that repository name JFrog artifactory was given wrong. Also found that location of the helm was wrong. 
+20. As I have fixed both the issues, I have once again started the CI Pipeline job and build got success.
+
+<img src="images/CI-Build-Success.png" width="600">
 
 
-Execution of CD Pipeline
-===========================
+Phase 3: Execution of CD Pipeline
+---------------------------------
 1. At first create a seperate repository for CD pipeline and create branch for each environment type for eg. Dev, QA, Perf, PROD.
 2. In this repository I need to have values.yaml file and Jenkinsfile. In the values.yaml file, I need to provide values for each environment type.
 3. In the Deployment Jenkinsfile, at first defining the variables like label, namespace, environm and has two stages. 
 4. In the 1st stage, I am cloning the deployment repository and getting the data from Dev branch as it has the values.yaml file for Dev environment specifications.
 5. In the 2nd stage, I am calling out helm commands to perform the actual deployment such as helm repo add, helm repo update, helm upgrade.
-6. Simillarly, I need to have the pipeline code for other environments as well. 
+6. Simillarly, I need to have the values.yaml for other environments as well and in Jenkinsfile for each environment I need to update only the namespace, environ & branch type.
 7. Now, create a Multibranch Pipeline to run the CD Pipeline as it has multiple branches. It will scan all the branches present in the repository, get the Jenkinsfile and perform the deployment. 
+8. As I can see all the environments all I have to do is click Build now on each environment. This is called Continuous Delivery Model.
+
+<img src="images/all-cd-env.png" width="600">
+
+9. If we get a callout to run the Dev environment pipeline, Click on Build now and it will take Helm chart from the JFrog, apply the values from values.yaml file and deploy it into the respective namespace.
+10. The build was failed due to some small folder misconfigurations. So, I didn't discussed over here.
+11. After the changes, deployment to dev environment is successfull.
+
+<img src="images/dev-env.png" width="600">
+
+
+12. The same way I had done deployed in the QA, Perf, production through respective branches. It will get neccessary values from values.yaml file and deploy it in respective namespace.
+
+<img src="images/all-branch.png" width="600">
+
+13. In case of any code change, only the CI Pipeline will run. CD Pipeline will not run. CD Pipeline can be also called as single click deployment. Once I get a callout to run the Dev CD Pipeline, development team will available to validate and if it is successfull, I will get a callout to run QA CD Pipeline after taking neccessary approvals. QA team will validate the deployment and the same is repeated till the application is deployed into the Production environment. 
+
+
+
 
 
 
