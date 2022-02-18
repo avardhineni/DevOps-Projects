@@ -2,8 +2,8 @@ pipeline {
 
   environment {
     label = "deploy-mobile-web-app"
-    namespace = "qa"
-    environ = "qa"
+    namespace = "Dev"
+    environ = "Dev"
   }
   agent any
 
@@ -11,7 +11,7 @@ pipeline {
 
       stage ('Checkout SCM'){
         steps {
-          checkout([$class: 'GitSCM', branches: [[name: '*/qa']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://iwayqtech@bitbucket.org/iwayqtech/mobile-web-app-deployments.git']]])
+          checkout([$class: 'GitSCM', branches: [[name: '*/Dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'git clone https://SimplifiedDevOps@bitbucket.org/simplifieddevops/devopsdashboard.git']]])
         }
       }
 	  
@@ -21,7 +21,7 @@ pipeline {
           
            dir("iwayq-web-app"){
                     sh 'pwd'
-                    sh "sudo /usr/local/bin/helm repo add mobile-local https://iwayqweb.jfrog.io/artifactory/mobile-helm-local --username prreddy1986@gmail.com --password mko09ijN"
+                    sh "sudo /usr/local/bin/helm repo add iwayq-local https://simplifieddevops.jfrog.io/artifactory/javappweb-local --username prreddy1986@gmail.com --password mko09ijN"
                     sh "sudo /usr/local/bin/helm repo update"
                     sh "sudo /usr/local/bin/helm upgrade iwayq-web-app-${environ} --install --namespace ${namespace}  --force ."
                     sh "sudo /usr/local/bin/helm list -a --namespace ${namespace}"
