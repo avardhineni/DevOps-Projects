@@ -160,7 +160,7 @@ Phase 3: Execution of CD Pipeline
 
 12. The same way I had done deployed in the QA, Perf, production through respective branches. It will get neccessary values from values.yaml file and deploy it in respective namespace.
 
-<img src="images/all-branch.png" width="600">
+<img src="images/all-branch.png" width="800">
 
 13. In case of any code change, only the CI Pipeline will run. CD Pipeline will not run. CD Pipeline can be also called as single click deployment. Once I get a callout to run the Dev CD Pipeline, development team will available to validate and if it is successfull, I will get a callout to run QA CD Pipeline after taking neccessary approvals. QA team will validate the deployment and the same is repeated till the application is deployed into the Production environment. 
 
