@@ -1,5 +1,8 @@
-# dashboard
-1. AWS IWAYQ PROJECT 3 - TIER ARCHITECTURE
-2. AWS TERRAFORM PROJECT
-3. AWS AMI
-4. AWS MICROSERVICE
+Overall we need to have three different vectors:
+1. Infrastructure Provisioning phase
+2. Application build and deployment phase
+3. Configuring the monitoring and logging is the 3rd phase. 
+
+Better to keep all the entities as seperate. 
+
+
