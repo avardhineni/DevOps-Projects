@@ -1,8 +1,0 @@
----
-
-## Setup Directories 
-
-tomcat_archive_files_dir: /opt
-tomcat_catalina_home: /opt/tomcat
-
-
