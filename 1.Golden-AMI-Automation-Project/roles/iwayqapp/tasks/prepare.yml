@@ -1,0 +1,9 @@
+---
+
+- name: Download Apache Tomcat zip archive
+  become: yes
+  get_url:
+    url: https://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.69/bin/apache-tomcat-8.5.69.zip
+    dest: "{{ tomcat_archive_files_dir }}/apache-tomcat-8.5.69.zip"
+    mode: '0644'
+    

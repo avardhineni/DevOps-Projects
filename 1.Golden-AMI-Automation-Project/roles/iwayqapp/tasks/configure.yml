@@ -1,0 +1,76 @@
+---
+ 
+- name: create ansadmin user
+  group:
+    name: "ansadmin"
+
+- name: create ansadmin user
+  user:
+    name: "ansadmin"
+    group: "wheel"
+
+- name: create .ssh folder
+  file:
+    path:  /home/ansadmin/.ssh
+    owner: "ansadmin"
+    mode: "u=rwx,g=,o="
+    state: directory
+
+- name: copy public keys
+  copy:
+    src: "{{ role_path }}/files/public.key"
+    dest: "/home/ansadmin/.ssh/authorized_keys"
+    owner: "ansadmin"
+    group: "ansadmin"
+    mode: 0400
+   
+- name: Extract Apache zip archive
+  become: yes
+  command: "unzip /opt/apache-tomcat-8.5.69.zip"
+  args:
+    chdir: /opt
+
+- name: Rename tomcat directory
+  become: yes
+  command: "mv /opt/apache-tomcat-8.5.69 /opt/tomcat"
+  
+- name: Add execution permission to tomcat binary
+  file:
+    path: "{{ tomcat_catalina_home }}/bin"
+    state: directory
+    recurse: yes
+    owner: root
+    group: root
+    mode: 0555
+
+- name: copy tomcat users config
+  copy:
+    src: "{{ role_path }}/files/tomcat-users.xml"
+    dest: "{{ tomcat_catalina_home }}/conf/tomcat-users.xml"
+    owner: "root"
+    group: "root"
+    mode: 0644
+
+- name: setup temp directory for cloudwatch agent install
+  become: yes
+  file:
+    path: /tmp/aws-cw-agent
+    state: directory
+
+- name: download installer
+  become: yes
+  get_url:
+    url: https://s3.amazonaws.com/amazoncloudwatch-agent/centos/amd64/latest/amazon-cloudwatch-agent.rpm
+    dest: /tmp/aws-cw-agent/amazon-cloudwatch-agent.rpm
+
+- name: install cloudwatch agent 
+  become: yes
+  shell: rpm -U /tmp/aws-cw-agent/amazon-cloudwatch-agent.rpm
+
+- name: start cloudwatch agent
+  become: yes
+  shell: |
+    /usr/bin/amazon-cloudwatch-agent-ctl \
+        -a fetch-config \
+        -m ec2 \
+        -s
