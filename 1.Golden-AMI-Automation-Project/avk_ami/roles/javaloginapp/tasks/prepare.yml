@@ -1,0 +1,9 @@
+---
+
+- name: Download Apache Tomcat zip archive
+  become: yes
+  get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.75/bin/apache-tomcat-8.5.75.zip
+    dest: "{{ tomcat_archive_files_dir }}/apache-tomcat-8.5.75.zip"
+    mode: '0644'
+    

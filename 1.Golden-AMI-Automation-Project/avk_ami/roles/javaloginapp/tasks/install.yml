@@ -1,0 +1,21 @@
+---
+
+- name: Install git
+  yum:
+    name: git
+    state: installed
+
+- name: Install awscli
+  yum:
+    name: awscli
+    state: installed
+
+- name: Install Java
+  yum:
+    name: java
+    state: installed
+
+- name: Install unzip
+  yum:
+    name: unzip
+    state: installed
