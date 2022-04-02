@@ -1,6 +1,8 @@
 ---
 - name: Install nodejs and npm
   hosts: 54.226.102.198
+  become: True
+  become_method: root
   tasks:
     - name: Update apt repo and cache
       ansible.builtin.apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
@@ -12,7 +14,9 @@
 
 
 - name: Create new linux user for nodejs app
-  hosts: 54.226.102.198    
+  hosts: 54.226.102.198  
+  become: True
+  become_method: root  
   vars_files:
     - project-vars  
   tasks:
