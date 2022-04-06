@@ -107,13 +107,14 @@ Ideally, while planning for Automation, At first I need to execute it manually a
 10. Create the deployment and service manifest files for helm charts. These files are available helm charts folder as helm designated folder structure. The values are variabilized to support various environment types. 
 11. Now before creating Jenkinsfile, I need to perform tool configuration by supplying the endpoints of maven, sonarqube, Jfrog by navigating to Configure System under Manage Jenkins. Maven configuration can be found in Global tool configuration. 
 12. Create the Jenkins file with various stages in it.
-    Stage 1: Performs the Git clone process. The code will come to build server.
-    Stage 2: Build Stage, here I am running mvn package command from the folder java-source as it has source code and pom.xml file.
-    Stage 3: The next stage is related to SonarQube code analysis. 
-    Stage 4: It is related to JFrog configurations. 
-    Stage 5: This stage is publishing build information. 
-    Stage 6: This stage will run the Ansible Playbook to create the docker image and push the image to docker hub. 
-    Stage 7: The last stage is to prepare the helm charts. I am running the helm package commands from helmcharts folder. This will create the helm charts and to publish the         helm charts to jfrog artifactory mentioned the command helm push-artifactory. Also create another repository to hold the helm charts. 
+    - Stage 1: Performs the Git clone process. The code will come to build server.
+    - Stage 2: Build Stage, here I am running mvn package command from the folder java-source as it has source code and pom.xml file.
+    - Stage 3: The next stage is related to SonarQube code analysis. 
+    - Stage 4: It is related to JFrog configurations. 
+    - Stage 5: This stage is publishing build information. 
+    - Stage 6: This stage will run the Ansible Playbook to create the docker image and push the image to docker hub. 
+    - Stage 7: The last stage is to prepare the helm charts. I am running the helm package commands from helmcharts folder. This will create the helm charts and to publish   
+               the helm charts to jfrog artifactory mentioned the command helm push-artifactory. Also create another repository to hold the helm charts. 
 13. Now in the Jenkins server, create a new Pipeline job. Provide the Jenkinsfile path in the Pipeline script from SCM. 
 
 <img src="images/Pipeline.png" width="600">
