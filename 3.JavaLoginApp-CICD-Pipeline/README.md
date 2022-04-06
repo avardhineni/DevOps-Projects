@@ -44,7 +44,7 @@ All the above configurations is specified in the Jenkinsfile in the declarative 
 
 ## Phase 1: Planning 
 
-# A. Planning Tools
+### A. Planning Tools
 
 <img src="images/planning-tools.png" width="600">
 
@@ -57,7 +57,7 @@ At first, before implementing planning is very important.
 
 As of now I am installing all these tools in Jenkins control node. If using Jenkins Agent, I need to make sure that all these components are installed in each slave node.
 
-# B. Planning for Credentials
+### B. Planning for Credentials
 
 <img src="images/Planning-Creds.png" width="500">
 
@@ -68,7 +68,7 @@ I need to provide credentials for
 3. Jfrog 
 4. Docker Hub Registry (Ansible) 
 
-# C. Planning for Jenkins Plugins
+### C. Planning for Jenkins Plugins
 
 <img src="images/Planning-Plugins.png" width="500">
 
@@ -79,7 +79,7 @@ The Plugins need to be configured are
 
 Depending on my project scenario, I am not installing Ansible plugin as I need Ansible to run a playbook file.
 
-# D. Planning for Configuration files
+### D. Planning for Configuration files
 
 <img src="images/Planning-conf-files.png" width="600">
 
