@@ -114,8 +114,11 @@ apt-mark hold kubelet kubectl
 
 # Restart the kubelet:
 
-`systemctl daemon-reload`
-`systemctl restart kubelet`
+```
+systemctl daemon-reload
+systemctl restart kubelet
+
+```
 
 
 # Uncordon the node:
@@ -133,9 +136,11 @@ apt-mark hold kubelet kubectl
 
 - After the kubelet is upgraded on all nodes verify that all nodes are available again by running the following command from anywhere kubectl can access the cluster:
 
-`kubectl get nodes`
-`kubeadm version`
-`kubectl version`
+```
+kubectl get nodes
+kubeadm version
+kubectl version
+```
 
 
 
