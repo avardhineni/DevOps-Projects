@@ -13,6 +13,8 @@
 
 - name: Download and unpack Nexus installer
   hosts: nexus_server
+  become: True
+  become_method: root
   tasks: 
     - name: Check nexus folder stats
       ansible.builtin.stat:

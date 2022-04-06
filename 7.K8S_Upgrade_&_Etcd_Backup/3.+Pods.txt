@@ -1,0 +1,110 @@
+***************************************************************************************************
+*                                                                                                 *
+* EXERCISE: Pods | Kubernetes                                                                     *
+*                                                                                                 *
+* Author: Srinath Challa | Kubernetes SME | Udemy                                                 *
+*                                                                                                 *
+* Connect me on:                                                                                  *    
+* --------------                                                                                  *
+* https://www.udemy.com/user/srinathchalla/                                                       *
+* https://www.linkedin.com/in/srinathchalla/                                                      *
+* https://www.youtube.com/srinathchalla                                                           *
+*                                                                                                 *
+* References:                                                                                     *
+* -----------                                                                                     *
+* https://kubernetes.io/docs/concepts/workloads/pods/                                             *
+* https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/                               *
+* https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/                            *
+* https://kubernetes.io/docs/tasks/configure-pod-container/                                       *
+* https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/ *
+*                                                                                                 *
+***************************************************************************************************
+
+In This Exercise:
+-----------------
+You will deploy the sample Pod and perform various operations that we use everyday.
+
+PRE-REQ: 
+--------
+a. To successfully finish this exercise, It is important to go through Pod Concept and Demo videos
+b. You can refer to Kuberenetes Docs for help when needed.
+
+
+***************************************************************************************************
+
+
+STEP-1: Deploying POD:
+----------------------
+Deploy sample Pod with below configuration using "kubectl run .." command.
+
+Container Image: nginx:1.18
+Pod Name: nginx-pod
+
+
+***************************************************************************************************
+
+
+STEP-2: Display the POD
+----------------------
+
+a. Ensure "nginx-pod" is in "Running" state.
+b. Display the complete details of nginx-pod by running "..describe pod.." command
+c. Identify on which node this Pod is currently running. (HINT: Run get pods with wide option).
+
+
+***************************************************************************************************
+
+STEP-3: Redirect the output:
+---------------------------
+
+a. Display "nginx-pod" using "..get pod.." and redirect the output to "YAML" format.
+b. Display "nginx-pod" using "..get pod.." and redirect the output to "JSON" format.
+
+
+***************************************************************************************************
+
+STEP-4: Pod Labels & Selectors:
+-------------------------------
+
+a. Display labels of nginx-pod
+b. Display Pod with label "component=kube-apiserver" in kube-system namespace.
+
+
+***************************************************************************************************
+
+
+STEP-5: Pod Editing:
+--------------------
+a. Edit the "nginx-pod" using "kubectl edit.." command and update the container image version from 1.18 to 1.19
+b. Ensure the "nginx-pod" is running successfully with container image 1.19
+
+
+***************************************************************************************************
+
+STEP-6: Pod Logs:
+-----------------
+a. Display the "nginx-pod" logs
+b. Display logs of "kube-scheduler-master" Pod. This Pod runs in "kube-system" namespace.
+
+
+***************************************************************************************************
+
+STEP-7: Resource Usage:
+-----------------------
+a. Ensure Metrics-Server is running inside your cluster.
+b. Display the CPU and Memory usage of "nginx-pod"
+c. Display resource usage of Pods in ALL namespaces
+d. Display resource usage of Pods in "kube-system" namespace and sort the output by cpu usage
+e. Display resource usage of Pods in "kube-system" namespace and sort the output by memory usage
+f. Display resource usage of Pods in "kube-system" namespace. Sort the output by memory usage and save the o/p to a file
+
+
+***************************************************************************************************
+
+STEP-8: Delete the Pod:
+-----------------------
+a. Delete the "nginx-pod"
+b. Ensure there are no Pods running (in the default namespace).
+
+
+***************************************************************************************************

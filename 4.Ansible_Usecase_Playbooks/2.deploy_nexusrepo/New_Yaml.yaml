@@ -1,0 +1,15 @@
+apiVersion: 
+kind: pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+  spec:
+   Containers:
+   -  name: nginx-container
+      image: nginx
+      ports:
+      - containerPort: 80
+      volumeMounts:
+      - name: nginx-vol
+        mountPath: /usr/nginx/html
