@@ -29,24 +29,24 @@ d. For more details, please visit Kubernetes docs.
 
 0. Determine which version to upgrade to
 
-''' apt-cache madison kubeadm '''
+' apt-cache madison kubeadm '
 
 
 # Ugrading Kubeadm:
 
 NOTE: If a package is marked "hold", it is held back: The package cannot be installed, upgraded, or removed until the hold mark is removed.
 
-'''apt-mark unhold kubeadm && \
-'''apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
-'''apt-mark hold kubeadm
+apt-mark unhold kubeadm && \
+apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
+apt-mark hold kubeadm
 
-''' kubeadm version
+kubeadm version
 
 
 # Upgrading Node:
 
-''' kubeadm upgrade plan
-''' kubeadm upgrade apply v1.21.0
+kubeadm upgrade plan
+kubeadm upgrade apply v1.21.0
 
 
 
@@ -54,25 +54,25 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 
 - Prepare the node for maintenance by marking it unschedulable and evicting the workload
 
-''' kubectl drain master --ignore-daemonsets
+kubectl drain master --ignore-daemonsets
 
 
 # Upgrade "kubelet" and "kubectl":
 
-''' apt-mark unhold kubelet kubectl && \
-''' apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
-''' apt-mark hold kubelet kubectl
+apt-mark unhold kubelet kubectl && \
+apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
+apt-mark hold kubelet kubectl
 
 
 # Restart the "Kubelet":
 
-''' systemctl daemon-reload
-''' systemctl restart kubelet
+systemctl daemon-reload
+systemctl restart kubelet
 
 
 # Uncordon the node:
 
-''' kubectl uncordon master
+kubectl uncordon master
 
 
 
@@ -84,42 +84,42 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 
 # Upgrade kubeadm:
 
-''' apt-mark unhold kubeadm && \
-''' apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
-''' apt-mark hold kubeadm
+apt-mark unhold kubeadm && \
+apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
+apt-mark hold kubeadm
 
 # Upgrade "Node": (Run it on worker node)
 
 - NOTE: For worker nodes this upgrades the local kubelet configuration:
 
-''' kubeadm upgrade node
+kubeadm upgrade node
 
 
 # "Drain" the node: (Run it on master node)
 
 - Prepare the node for maintenance by marking it unschedulable and evicting the workloads:
 
-''' kubectl drain worker-1 --ignore-daemonsets
+kubectl drain worker-1 --ignore-daemonsets
 
 
 # Upgrade kubelet and kubectl:
 
-''' apt-mark unhold kubelet kubectl && \
-''' apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
-''' apt-mark hold kubelet kubectl
+apt-mark unhold kubelet kubectl && \
+apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
+apt-mark hold kubelet kubectl
 
 
 # Restart the kubelet:
 
-''' systemctl daemon-reload
-''' systemctl restart kubelet
+systemctl daemon-reload
+systemctl restart kubelet
 
 
 # Uncordon the node:
 
 - Bring the node back online by marking it schedulable:
 
-''' kubectl uncordon worker-1
+kubectl uncordon worker-1
 
 
 ## Upgrading WORKER Node(2):
@@ -130,9 +130,9 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 
 - After the kubelet is upgraded on all nodes verify that all nodes are available again by running the following command from anywhere kubectl can access the cluster:
 
-''' kubectl get nodes
-''' kubeadm version
-''' kubectl version
+kubectl get nodes
+kubeadm version
+kubectl version
 
 
 
