@@ -36,17 +36,22 @@ d. For more details, please visit Kubernetes docs.
 
 NOTE: If a package is marked "hold", it is held back: The package cannot be installed, upgraded, or removed until the hold mark is removed.
 
-`apt-mark unhold kubeadm && \`
-`apt-get update && apt-get install -y kubeadm=1.21.0-00 && \`
-`apt-mark hold kubeadm`
+```
+apt-mark unhold kubeadm && \
+pt-get update && apt-get install -y kubeadm=1.21.0-00 && \
+apt-mark hold kubeadm
 
-`kubeadm version`
+kubeadm version
+
+```
 
 
 ## Upgrading Node:
 
-`kubeadm upgrade plan`
-`kubeadm upgrade apply v1.21.0`
+```
+kubeadm upgrade plan
+kubeadm upgrade apply v1.21.0
+```
 
 
 
@@ -59,20 +64,23 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 
 ## Upgrade "kubelet" and "kubectl":
 
-`apt-mark unhold kubelet kubectl && \`
-`apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \`
-`apt-mark hold kubelet kubectl`
+```
+apt-mark unhold kubelet kubectl && \
+apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
+apt-mark hold kubelet kubectl
+```
 
 
 ## Restart the "Kubelet":
 
-`systemctl daemon-reload`
-`systemctl restart kubelet`
-
+```
+systemctl daemon-reload
+systemctl restart kubelet
+```
 
 ## Uncordon the node:
 
-`kubectl uncordon master
+`kubectl uncordon master`
 
 
 
@@ -84,9 +92,12 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 
 ## Upgrade kubeadm:
 
-`apt-mark unhold kubeadm && \`
-`apt-get update && apt-get install -y kubeadm=1.21.0-00 && \`
-`apt-mark hold kubeadm`
+```
+apt-mark unhold kubeadm && \
+apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
+apt-mark hold kubeadm
+
+```
 
 ## Upgrade "Node": (Run it on worker node)
 
