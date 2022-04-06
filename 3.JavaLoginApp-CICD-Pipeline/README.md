@@ -14,8 +14,8 @@
 
 But, having the CI & CD pipelines combined is not a best practice. As a best practice, I will split the Pipeline into 2 pipelines, one for CI Pipeline and other for CD pipeline. 
 
-CI Pipeline
------------
+## CI Pipeline
+
 
 <img src="images/ci-pipeline.png" width="800">
 
@@ -25,8 +25,8 @@ CI Pipeline
 4. Jenkins will create the helm charts. In this helm chart, the values are not hard coded. The values will be variablised according to the environment type. 
 5. The helm charts are again pushed to JFrog artifactory. 
 
-CD Pipeline
------------
+## CD Pipeline
+
 
 <img src="images/cd-pipeline.png" width="800">
 
@@ -39,13 +39,12 @@ In this entire process, CI pipeline job will run one time and CD pipeline job wi
 
 All the above configurations is specified in the Jenkinsfile in the declarative way.
 
-Implementation of CI/CD Pipelines
-=================================
+### Implementation of CI/CD Pipelines
 
-Phase 1: Planning 
------------------
 
-A. Planning Tools
+## Phase 1: Planning 
+
+# A. Planning Tools
 
 <img src="images/planning-tools.png" width="600">
 
@@ -58,7 +57,7 @@ At first, before implementing planning is very important.
 
 As of now I am installing all these tools in Jenkins control node. If using Jenkins Agent, I need to make sure that all these components are installed in each slave node.
 
-B. Planning for Credentials
+# B. Planning for Credentials
 
 <img src="images/Planning-Creds.png" width="500">
 
@@ -69,7 +68,7 @@ I need to provide credentials for
 3. Jfrog 
 4. Docker Hub Registry (Ansible) 
 
-C. Planning for Jenkins Plugins
+# C. Planning for Jenkins Plugins
 
 <img src="images/Planning-Plugins.png" width="500">
 
@@ -80,7 +79,7 @@ The Plugins need to be configured are
 
 Depending on my project scenario, I am not installing Ansible plugin as I need Ansible to run a playbook file.
 
-D. Planning for Configuration files
+# D. Planning for Configuration files
 
 <img src="images/Planning-conf-files.png" width="600">
 
@@ -94,8 +93,8 @@ Ideally, while planning for Automation, At first I need to execute it manually a
 5. Now, in order to inform Jenkins to execute the steps in orderly manner, I need to provide Jenkinsfile with all the instructions discussed above in a loosely coupled manner (Stages) i.e. a declarative pipeline.
 
 
-Phase 2: Execution of CI Pipeline
----------------------------------
+## Phase 2: Execution of CI Pipeline
+
 1. At first login to the Jenkins and make sure all the tools are installed. 
 2. While installing kubectl, I have to make sure that it is pointing to kubernetes control plane API server. 
 3. After installing Helm, I also need to install plugin "Plugin-Artifactory" so that helm charts can be pushed to JFrog artifactory.
@@ -137,8 +136,8 @@ Phase 2: Execution of CI Pipeline
 <img src="images/CI-Build-Success.png" width="600">
 
 
-Phase 3: Execution of CD Pipeline
----------------------------------
+## Phase 3: Execution of CD Pipeline
+
 1. At first create a seperate repository for CD pipeline and create branch for each environment type for eg. Dev, QA, Perf, PROD.
 2. In this repository I need to have values.yaml file and Jenkinsfile. In the values.yaml file, I need to provide values for each environment type.
 3. In the Deployment Jenkinsfile, at first defining the variables like label, namespace, environm and has two stages. 
@@ -165,5 +164,5 @@ Phase 3: Execution of CD Pipeline
 
 14. This is one of the method to implement CI/CD Pipelines to deploy an application. There are many other methods, it all depends on the project, technology stack that we are selecting and many other factors. Our end goal should be to deploy an application that has High Availability, Scalability, Disaster Recovery.
 
-Thank You
-----------
+# Thank You
+
