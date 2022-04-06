@@ -40,10 +40,9 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 apt-mark unhold kubeadm && \
 pt-get update && apt-get install -y kubeadm=1.21.0-00 && \
 apt-mark hold kubeadm
-
-kubeadm version
-
 ```
+
+`kubeadm version`
 
 
 ## Upgrading Node:
@@ -96,7 +95,6 @@ systemctl restart kubelet
 apt-mark unhold kubeadm && \
 apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
 apt-mark hold kubeadm
-
 ```
 
 ## Upgrade "Node": (Run it on worker node)
@@ -119,7 +117,6 @@ apt-mark hold kubeadm
 apt-mark unhold kubelet kubectl && \
 apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
 apt-mark hold kubelet kubectl
-
 ```
 
 
