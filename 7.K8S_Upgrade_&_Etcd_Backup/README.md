@@ -104,9 +104,12 @@ NOTE: If a package is marked "hold", it is held back: The package cannot be inst
 
 # Upgrade kubelet and kubectl:
 
-`apt-mark unhold kubelet kubectl && \`
-`apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \`
-`apt-mark hold kubelet kubectl`
+```
+apt-mark unhold kubelet kubectl && \
+apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
+apt-mark hold kubelet kubectl
+
+```
 
 
 # Restart the kubelet:
