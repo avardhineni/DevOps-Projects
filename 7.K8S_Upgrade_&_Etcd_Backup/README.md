@@ -8,10 +8,10 @@
 
 ## Please read before performing the demo
 
-- These commands need to run on cluster running with Ubuntu 
-- Master and Worker nodes in your cluster might differ from this.
-- Kubernets version might be different in your case, but procedure is the same.
-- For more details, please visit Kubernetes docs.
+1. These commands need to run on cluster running with Ubuntu 
+2. Master and Worker nodes in your cluster might differ from this.
+3. Kubernets version might be different in your case, but procedure is the same.
+4. For more details, please visit Kubernetes docs.
 
 
 ## OVERVIEW: Steps involved in Kubernetes Version Upgrade:
