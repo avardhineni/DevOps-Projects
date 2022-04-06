@@ -39,7 +39,7 @@ In this entire process, CI pipeline job will run one time and CD pipeline job wi
 
 All the above configurations is specified in the Jenkinsfile in the declarative way.
 
-### Implementation of CI/CD Pipelines
+# Implementation of CI/CD Pipelines
 
 
 ## Phase 1: Planning 
