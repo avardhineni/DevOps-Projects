@@ -113,8 +113,8 @@ Ideally, while planning for Automation, At first I need to execute it manually a
     - Stage 4: It is related to JFrog configurations. 
     - Stage 5: This stage is publishing build information. 
     - Stage 6: This stage will run the Ansible Playbook to create the docker image and push the image to docker hub. 
-    - Stage 7: The last stage is to prepare the helm charts. I am running the helm package commands from helmcharts folder. This will create the helm charts and to publish   
-               the helm charts to jfrog artifactory mentioned the command helm push-artifactory. Also create another repository to hold the helm charts. 
+    - Stage 7: The last stage is to prepare the helm charts. I am running the helm package commands from helmcharts folder. This will create the helm charts and to publish the 
+               helm charts to jfrog artifactory mentioned the command helm push-artifactory. Also create another repository to hold the helm charts. 
 13. Now in the Jenkins server, create a new Pipeline job. Provide the Jenkinsfile path in the Pipeline script from SCM. 
 
 <img src="images/Pipeline.png" width="600">
