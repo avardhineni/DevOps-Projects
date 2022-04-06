@@ -29,16 +29,16 @@ d. For more details, please visit Kubernetes docs.
 
 0. Determine which version to upgrade to
 
-''' apt-cache madison kubeadm
+'''apt-cache madison kubeadm
 
 
 # Ugrading Kubeadm:
 
 NOTE: If a package is marked "hold", it is held back: The package cannot be installed, upgraded, or removed until the hold mark is removed.
 
-''' apt-mark unhold kubeadm && \
-''' apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
-''' apt-mark hold kubeadm
+'''apt-mark unhold kubeadm && \
+'''apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
+'''apt-mark hold kubeadm
 
 ''' kubeadm version
 
