@@ -5,7 +5,7 @@
 	"avk_subnet": "subnet-0211bb345e35981d9",
 	"avk_region": "us-east-1",
 	"avk_instance_prof": "ec2-to-s3-role",
-	"avk_source_ami_regex": "avk-global-image",
+	"avk_source_ami_regex": "amzn2-ami-hvm-2.0.20210701.0-x86_64-gp2",
     "avk_ami_owner": "510417014637",
 	"avk_creator": "simplified.devops@gmail.com",
 	"avk_instance_type": "t2.micro",
