@@ -15,9 +15,9 @@ Create the AMI and terminate the EC2 instance.
 
 To Execute the process, run the below command:
 ```
-packer build -var-file build/variables.json build/javaloginapp.json
+packer.exe build -var-file build/variables.json build/javaloginapp.json
 ```
 In case of any errors, to debug the execution, run the below command:
 ```
-packer build -debug -var-file build/variables.json build/javaloginapp.json
+packer.exe build -debug -var-file build/variables.json build/javaloginapp.json
 ```
