@@ -7,4 +7,4 @@
 
 
 
-packer build -var-file build/variables.json build/iwayqapp.json
+packer build -var-file build/variables.json build/javaloginapp.json
