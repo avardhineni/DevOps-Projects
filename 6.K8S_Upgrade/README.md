@@ -1,12 +1,12 @@
 
 # UPGRADING Kuberntes version 1.20.7 to 1.21.0 using Kubeadm
 
-## In this demo:
+## In this Article:
 
 1. We will upgrade kubernetes version 1.20.7 to 1.21.0 using "kubeadm"
 2. In my setup, there is 1 master node and 2 worker nodes.
 
-## Please read before performing the demo
+## Please read before performing the steps:
 
 1. These commands need to run on cluster running with Ubuntu 
 2. Master and Worker nodes in your cluster might differ from this.
