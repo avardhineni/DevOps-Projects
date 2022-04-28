@@ -29,6 +29,7 @@
 
 0. Determine which version to upgrade to
 
+`apt update`
 `apt-cache madison kubeadm`
 
 
