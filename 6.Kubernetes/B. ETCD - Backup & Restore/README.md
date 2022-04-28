@@ -78,7 +78,7 @@ status: {}
 - Run the below command:
 `kubectl get pods -n kube-system | grep etcd`
 
-# IF it is pending even after few minutes, try delete the etcd-master pod. Since this is "static pod", K8S will create from above etcd.yaml file
+### If it is pending even after few minutes, try delete the etcd-master pod. Since this is "static pod", K8S will create from above etcd.yaml file
 
 `kubectl delete pods etcd-master -n kube-system --grace-period=0 --force`
 
