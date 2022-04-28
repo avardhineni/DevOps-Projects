@@ -151,6 +151,13 @@ kubeadm version
 kubectl version
 ```
 
+## Articles To Read
+
+https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/
+https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/
+https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
+https://platform9.com/blog/kubernetes-upgrade-the-definitive-guide-to-do-it-yourself/
+
 
 
 
