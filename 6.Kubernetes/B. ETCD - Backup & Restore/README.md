@@ -1,171 +1,99 @@
 
-# UPGRADING Kuberntes version 1.20.7 to 1.21.0 using Kubeadm
+# ETCD Database - Backup & Restore
 
 ## In this Article:
 
-1. We will upgrade kubernetes version 1.20.7 to 1.21.0 using "kubeadm"
-2. In my setup, there is 1 master node and 2 worker nodes.
-
-## Please read before performing the steps:
-
-1. These commands need to run on cluster running with Ubuntu 
-2. Master and Worker nodes in your cluster might differ from this.
-3. Kubernets version might be different in your case, but procedure is the same.
-4. For more details, please visit Kubernetes docs.
+1. We will perform the Backup and Restore of ETCD Database.
 
 
-## OVERVIEW: Steps involved in Kubernetes Version Upgrade:
+## The need for BackUp:
 
-1. Upgrade kubeadm
-2. Upgrade Node
-3. Drain the node (before kubelet upgrade)
-4. Upgrade kubelet and kubectl
-5. Restart the kubelet
-6. Uncordon the node
-7. Validate the Upgrade
+1. We need backups to restore when there is disaster. For example if someone accidently deletes the namespace where deployments are resided.
+2. To replicate the entire environment. 
+3. Migration: If we need to migrate the Kubernetes cluster from one environment to other. 
 
-
-## Upgrading MASTER(Control-Plane) Node(1).
-
-0. Determine which version to upgrade to
-
-`apt update`
-`apt-cache madison kubeadm`
+### There are many ways to perform the backup & Restore. Here, I will use "etcdtl" command line tool. 
+    Using this tool we can:
+- Create new entries
+- delete the entries
+- Take the snapshot of K8S Cluster information stored in ETCD database. 
 
 
-## Ugrading Kubeadm:
-
-NOTE: If a package is marked "hold", it is held back: The package cannot be installed, upgraded, or removed until the hold mark is removed.
+## Ensure if "etcdctl" command line tool is available by running below command. 
 
 ```
-apt-mark unhold kubeadm && \
-pt-get update && apt-get install -y kubeadm=1.21.0-00 && \
-apt-mark hold kubeadm
+export ETCDCTL_API=3
+etcdctl version
 ```
+If not available, we can follow the steps provided in the link:
 
-`kubeadm version`
+`https://github.com/etcd-io/etcd/releases`
 
+## Backup ETCD Database:
 
-## Upgrading Node:
-
-```
-kubeadm upgrade plan
-kubeadm upgrade apply v1.21.0
-```
-
-
-
-## Drain the node:
-
-- Prepare the node for maintenance by marking it unschedulable and evicting the workload
-
-`kubectl drain master --ignore-daemonsets`
-
-
-## Upgrade "kubelet" and "kubectl":
+- Run the below command:
 
 ```
-apt-mark unhold kubelet kubectl && \
-apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
-apt-mark hold kubelet kubectl
+etcdctl --endpoints=https://127.0.0.1:2379 \
+        --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+        --cert=/etc/kubernetes/pki/etcd/server.crt \
+        --key=/etc/kubernetes/pki/etcd/server.key \
+        snapshot save /opt/snapshot-28/02/2022-dev.db
 ```
 
-
-## Restart the "Kubelet":
-
-```
-systemctl daemon-reload
-systemctl restart kubelet
-```
-
-## Uncordon the node:
-
-`kubectl uncordon master`
-
-
-
-
-## Upgrading WORKER Node(1):
-
-- The upgrade procedure on worker nodes should be executed one node at a time or few nodes at a time, without compromising the minimum required capacity for running your workloads.
-
-
-## Upgrade kubeadm:
+- Check the status of backup:
 
 ```
-apt-mark unhold kubeadm && \
-apt-get update && apt-get install -y kubeadm=1.21.0-00 && \
-apt-mark hold kubeadm
+etcdctl --write-out=table snapshot status /opt/snapshot-28/02/2022-dev.db
 ```
 
-## Upgrade "Node": (Run it on worker node)
+## Restore of ETCD Database:
 
-- NOTE: For worker nodes this upgrades the local kubelet configuration:
-
-`kubeadm upgrade node`
-
-
-## "Drain" the node: (Run it on master node)
-
-- Prepare the node for maintenance by marking it unschedulable and evicting the workloads:
-
-`kubectl drain worker-1 --ignore-daemonsets`
-
-
-## Upgrade kubelet and kubectl:
+- Run the below command: 
 
 ```
-apt-mark unhold kubelet kubectl && \
-apt-get update && apt-get install -y kubelet=1.21.0-00 kubectl=1.21.0-00 && \
-apt-mark hold kubelet kubectl
+etcdctl  --data-dir /var/lib/etcd-from-backup \
+         snapshot restore /opt/snapshot-28/02/2022-dev.db
 ```
 
+## Update ETCD Data Directory
 
-## Restart the kubelet:
+- To update new ETCD Data Directory location we need to update the ETCD Pod YAML file /etc/kubernetes/manifests/etcd.yaml
+- Take the backup of the manifest file
 
-```
-systemctl daemon-reload
-systemctl restart kubelet
+`cp /etc/kubernetes/manifests/etcd.yaml /tmp/etcd.yaml.bak`
 
-```
-
-
-## Uncordon the node:
-
-- Bring the node back online by marking it schedulable:
-
-`kubectl uncordon worker-1`
-
-
-## Upgrading WORKER Node(2):
-
-- Follow same above 6 steps as mentioned in "Upgrading WORKER Node(1)
-
-## Verify the status of the cluster
-
-- After the kubelet is upgraded on all nodes verify that all nodes are available again by running the following command from anywhere kubectl can access the cluster:
+- Change the hostPath location in the manifest file:
 
 ```
-kubectl get nodes
-kubeadm version
-kubectl version
+- hostPath:
+       path: /var/lib/etcd-from-backup   "Make sure this path is updated" 
+       type: DirectoryOrCreate
+     name: etcd-data
+status: {}   
 ```
 
-## Articles To Read
+## Check "etcd-master" Pod Status
 
-- https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/
-- https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/
-- https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
-- https://platform9.com/blog/kubernetes-upgrade-the-definitive-guide-to-do-it-yourself/
+- Run the below command:
+`kubectl get pods -n kube-system | grep etcd`
 
+# IF it is pending even after few minutes, try delete the etcd-master pod. Since this is "static pod", K8S will create from above etcd.yaml file
 
+`kubectl delete pods etcd-master -n kube-system --grace-period=0 --force`
 
+Wait for few mins and test the same.
 
+`kubectl get pods -n kube-system | grep etcd`
 
+## Articles to Read
 
-
-
-
+- https://rancher.com/blog/2019/2019-01-29-what-is-etcd/
+- https://www.redhat.com/en/topics/containers/what-is-etcd
+- https://etcd.io/docs/v3.4.0/dev-guide/interacting_v3/
+- https://github.com/etcd-io/etcd/
+- https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/
+- https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster
 
 
 
