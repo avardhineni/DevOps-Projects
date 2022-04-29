@@ -55,7 +55,7 @@ At first, before implementing planning is very important.
 3. For configuring SonarQube and JFrog nothing has to be installed, All the commands are ran from Maven.
 4. For CD pipelines I need to install Ansible, Docker, Docker_py, Kubectl, Helm.
 
-As of now I am installing all these tools in Jenkins control node. If using Jenkins Agent, I need to make sure that all these components are installed in each slave node.
+As of now I am installing all these tools in Jenkins control node. If using Jenkins Agent, I need to make sure that all these components are installed on agent node.
 
 ### B. Planning for Credentials
 
