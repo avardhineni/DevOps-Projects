@@ -97,9 +97,9 @@ Ideally, while planning for Automation, At first I need to execute it manually a
 
 1. At first login to the Jenkins and make sure all the tools are installed. 
 2. While installing kubectl, I have to make sure that it is pointing to kubernetes control plane API server. 
-3. After installing Helm, I also need to install plugin "Plugin-Artifactory" so that helm charts can be pushed to JFrog artifactory.
+3. After installing Helm, I also need to install plugin "Helm-Push-Artifactory-Plugin" so that helm charts can be pushed to JFrog artifactory.
 4. Currently I am preparing the infrastructure part. This can also be done through Terraform or Ansible. In this project, I am not doing Infrastructure automations, as I have already done Infrastructure automation in the 1st project, at present main focus is on Application automation. 
-5. I have installed Jenkins plugins as mentioned above after installing all the tools. 
+5. I need to install SonarQube Scanner plugin for SonarQube and Artifactory Plugin to connect to Jfrog artifactory.
 6. Once the plugins are installed, need to store the credentials for GIT, Sonar Token, & JFrog under Credentials Manager in Jenkins Server. 
 7. I also need to edit the pom.xml file by adding SonarCloud properties and distribution management settings of JFrog. 
 8. Now create the Dockerfile. In the Dockerfile, it will get the lastest tomcat image from the docker registry and copy my customized .war file to tomcat webapps folder and create an image out of it. 
