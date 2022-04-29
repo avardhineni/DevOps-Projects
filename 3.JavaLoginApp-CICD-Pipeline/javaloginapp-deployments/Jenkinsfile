@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    label = "deploy-mobile-web-app"
+    label = "deploy-javaloginapp"
     namespace = "Dev"
     environ = "Dev"
   }
