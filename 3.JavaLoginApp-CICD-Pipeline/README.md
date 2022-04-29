@@ -10,6 +10,7 @@
 3. Jenkins acts as a DevOps engineer and performs build and deployment. All I have to do is configure the Jenkins Server with correct configurations.
 4. Jenkins will take the code from Bit Bucket, do the Maven build, push the code for SonarQube analysis, once the quality gate is passed, the artifact will be pushed to JFrog artifactory. 
 5. With the help of Ansible Play books, jenkins will create a Docker container image from the artifact in Jfrog Artifact and publish it to the docker registry. 
+
 6. This image is used to deploy into specific namespaces through Kubernetes. 
 
 But, having the CI & CD pipelines combined is not a best practice. As a best practice, I will split the Pipeline into 2 pipelines, one for CI Pipeline and other for CD pipeline. 
