@@ -6,7 +6,6 @@
 - Child modules can be called multiple times within the same configuration, and multiple configurations can use the same child module.
 - Child modules are re-usable code. 
 
-## In Short
 ### Terraform Modules helps to stop creating duplicate resources within an orgranization and saves a lot of coders time.
 
 
