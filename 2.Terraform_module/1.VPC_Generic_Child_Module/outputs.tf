@@ -1,8 +1,8 @@
 
 output "vpc_id" {
-  value = aws_vpc.iwayqvpc.id
+  value = aws_vpc.megavpc.id
 }
 
-output "iwayq_pub_sub_id" {
-  value = aws_subnet.iwayq_pub_sub.id
+output "mega_pub_sub_id" {
+  value = aws_subnet.mega_pub_sub.id
 }
