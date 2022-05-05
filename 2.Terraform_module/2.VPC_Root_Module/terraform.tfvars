@@ -1,0 +1,8 @@
+region = "us-east-1"
+vpc_cidr = "172.32.0.0/16"
+instance_tenancy = "default"
+project = "megaweb"
+cidr_pub_subnet = "172.32.1.0/24"
+pub_availability_zone = "us-east-1a"
+cidr_priv_subnet = "172.32.2.0/24"
+priv_availability_zone = "us-east-1b"
