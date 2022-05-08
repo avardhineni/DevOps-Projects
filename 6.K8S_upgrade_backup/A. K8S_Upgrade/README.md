@@ -1,5 +1,5 @@
 
-# UPGRADING Kuberntes version 1.20.7 to 1.21.0 using Kubeadm
+# Upgrading Kuberntes version 1.20.7 to 1.21.0 using Kubeadm
 
 ## In this Article:
 
