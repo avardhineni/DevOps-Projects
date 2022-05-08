@@ -13,7 +13,7 @@
 3. Migration: If we need to migrate the Kubernetes cluster from one environment to other. 
 
 ### There are many ways to perform the backup & Restore. Here, I will use "etcdtl" command line tool. 
-    Using this tool we can:
+    Using this tool we can
 - Create new entries
 - delete the entries
 - Take the snapshot of K8S Cluster information stored in ETCD database. 
