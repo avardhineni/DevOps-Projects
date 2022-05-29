@@ -27,7 +27,7 @@
 
 ## Upgrading MASTER(Control-Plane) Node(1).
 
-0. Determine which version to upgrade to
+  Determine which version to upgrade to
 
 `apt update`
 `apt-cache madison kubeadm`
