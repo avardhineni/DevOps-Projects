@@ -1,0 +1,22 @@
+Steps to Restore EC2 Volume
+
+To recover the latest working state of the EC2 instance by creating new volume from the snapshot. 
+Attach the new volume to the EC2 instance.
+
+
+import boto3
+import itemgetter from operator
+Add ec2_client & ec2_resource
+hardcode the instance_id
+get the list of volumes
+use the latest volume using volumes['Volumes'][0]
+get the snapshots of the volume using volume id
+do the sorting to get the latest snapshot through itemgetter.
+create a new volume of the latest snapshot.
+attach volume to the ec2 instance.
+
+We may get error when calling the Attachvolume operation: vol-xxxxxxxxx is not available.  
+This may occur due to the volume is still in creation state. This is the timing issue.
+
+To fix the timing issue we can use while loop untill the volume state is Available.
+when in infinite loop, break the loop.
