@@ -12,7 +12,7 @@
       apt: name=net-tools  
 
 - name: Download and unpack Nexus installer
-  hosts: nexus_server
+  hosts: 134.122.73.79
   become: True
   become_method: root
   tasks: 
