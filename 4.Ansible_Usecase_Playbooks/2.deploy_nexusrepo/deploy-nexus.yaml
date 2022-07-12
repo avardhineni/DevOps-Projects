@@ -26,41 +26,41 @@
         dest: /opt/
       register: download_result  
     - name: Untar nexus installer
-      ansible.builtin.unarchive:
+      unarchive:
         src: "{{download_result.dest}}"
         dest: /opt/ 
         remote_src: yes   
       when: not stat_result.stat.exists    
     - name: Find nexus folder
-      ansible.builtin.find: 
+      find: 
         paths: /opt
         pattern: "nexus-*"
         file_type: directory
       register: find_result
     - name: Rename nexus folder
-      ansible.builtin.shell: mv {{find_result.files[0].path}} /opt/nexus
+      shell: mv {{find_result.files[0].path}} /opt/nexus
       when: not stat_result.stat.exists  
 
 - name: Create nexus user to own nexus folders
   hosts: nexus_server
   tasks:
     - name: Ensure group nexus exists
-      ansible.builtin.group: 
+      group: 
         name: nexus
         state: present
     - name: Create nexus user
-      ansible.builtin.user: 
+      user: 
         name: nexus
         group: nexus
     - name: Make nexus user owner of nexus folder
-      ansible.builtin.file: 
+      file: 
         path: /opt/nexus
         state: directory
         owner: nexus
         group: nexus
         recurse: yes    
     - name: Make nexus user owner of sonatype-work folder
-      ansible.builtin.file:
+      file:
         path: /opt/sonatype-work
         state: directory
         owner: nexus
@@ -73,24 +73,24 @@
   become_user: nexus     
   tasks:
     - name: Set run_as_user nexus
-      ansible.builtin.lineinfile:
+      lineinfile:
         path: /opt/nexus/bin/nexus.rc
         regexp: '^#run_as_user=""'
         line: run_as_user="nexus"
     - name: Start nexus
-      ansible.builtin.command: /opt/nexus/bin/nexus start
+      command: /opt/nexus/bin/nexus start
 
 - name: Verify nexus running
   hosts: nexus_server
   tasks:
     - name: Check with ps
-      ansible.builtin.shell: ps aux | grep nexus
+      shell: ps aux | grep nexus
       register: app_status
-    - ansible.builtin.debug: msg={{app_status.stdout_lines}}
+    - debug: msg={{app_status.stdout_lines}}
     - name: Wait one minute
-      ansible.builtin.pause:
+      pause:
         minutes: 1
     - name: Check with netstat
-      ansible.builtin.shell: netstat -plnt
+      shell: netstat -plnt
       register: app_status
-    - ansible.builtin.debug: msg={{app_status.stdout_lines}}
+    - debug: msg={{app_status.stdout_lines}}
