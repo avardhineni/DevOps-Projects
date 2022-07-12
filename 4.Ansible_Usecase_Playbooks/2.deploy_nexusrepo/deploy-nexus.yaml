@@ -9,7 +9,7 @@
     - name: Install Java 8
       apt: name=openjdk-8-jre-headless      
     - name: Install net-tools
-      ansible.builtin.apt: name=net-tools  
+      apt: name=net-tools  
 
 - name: Download and unpack Nexus installer
   hosts: nexus_server
