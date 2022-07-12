@@ -1,13 +1,13 @@
 ---
 - name: Install java and net-tools
-  hosts: nexus_server
+  hosts: 134.122.73.79
   become: True
   become_method: root
   tasks:
     - name: Update apt repo and cache
-      ansible.builtin.apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
     - name: Install Java 8
-      ansible.builtin.apt: name=openjdk-8-jre-headless      
+      apt: name=openjdk-8-jre-headless      
     - name: Install net-tools
       ansible.builtin.apt: name=net-tools  
 
