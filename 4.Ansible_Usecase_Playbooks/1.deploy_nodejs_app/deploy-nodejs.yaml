@@ -1,53 +1,48 @@
 ---
-- name: Install nodejs and npm
-  hosts: 54.226.102.198
-  become: True
-  become_method: root
+- name: Install node and npm
+  hosts: 159.29.1.56
   tasks:
-    - name: Update apt repo and cache
-      ansible.builtin.apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-    - name: Install nodejs and npm
-      ansible.builtin.apt: 
-        pkg:
-          - nodejs
-          - npm
+   - name: Updte apt repo and cache
+     apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+   - name: Install nodejs and npm
+     apt:
+	pkg:
+     - nodejs
+     - npm
 
-
-- name: Create new linux user for nodejs app
-  hosts: 54.226.102.198  
-  become: True
-  become_method: root  
-  vars_files:
-    - project-vars  
+- name: Create new linux user for node app
+  hosts: 159.29.1.56
   tasks:
-    - name: Create linux user
-      ansible.builtin.user:
-        name: "{{linux_name}}"
-        comment: Node User
-        group: admin
-
+   - name: create linuc user
+     user:
+       name: anasadmin
+       comment: ansible admin
+       group: admin	
 
 - name: Deploy nodejs app
-  hosts: 54.226.102.198
+  hosts: 159.29.1.56
   become: True
-  become_user: "{{linux_name}}"
-  vars_files:
-    - project-vars
-  tasks:
-    - name: Unpack the nodejs file
-      ansible.builtin.unarchive:
-        src: "{{location}}/nodejs-app-{{version}}.tgz"
-        dest: "{{user_home_dir}}"
-    - name: Install dependencies
-      community.general.npm:
-        path: "{{user_home_dir}}/package"
-    - name: Start the application
-      ansible.builtin.command: 
-        chdir: "{{user_home_dir}}/package/app"
-        cmd: node server
-      async: 1000
-      poll: 0  
-    - name: Ensure app is running
-      ansible.builtin.shell: ps aux | grep node
-      register: app_status
-    - ansible.builtin.debug: msg={{app_status.stdout_lines}}
+  become_user: anasadmin
+  tasks: 
+   - name: Copy nodejs folder to a server
+     copy:
+       src: [source file location]
+       dest: /home/anasadmin/app-1.0.0.tgz
+   - name: Unpack the nodejs file
+     unarchive: 
+       src: /home/anasadmin/app-1.0.0.tgz
+       dest: /home/anasadmin	
+       remote_src: yes
+   - name: Install dependencies
+     npm:
+       path: /home/anasadmin/package
+   - name: Start the application
+     command:
+       chdir: /home/anasadmin/package/app	
+       cmd: node server	
+     async: 1000
+     poll: 0
+   - name: Ensure app is running
+     shell: ps aux | grep node
+     register: app_status
+   - debug: msg={{app_status.stdout_lines}}
