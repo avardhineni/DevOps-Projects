@@ -7,8 +7,8 @@
    - name: Install nodejs and npm
      apt:
 	pkg:
-     - nodejs
-     - npm
+     	  - nodejs
+          - npm
 
 - name: Create new linux user for node app
   hosts: 159.29.1.56
