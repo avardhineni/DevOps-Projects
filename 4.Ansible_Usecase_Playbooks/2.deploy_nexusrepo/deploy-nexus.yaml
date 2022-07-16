@@ -17,7 +17,7 @@
   become_method: root
   tasks: 
     - name: Check nexus folder stats
-      ansible.builtin.stat:
+      stat:
         path: /opt/nexus
       register: stat_result  
     - name: Download Nexus
