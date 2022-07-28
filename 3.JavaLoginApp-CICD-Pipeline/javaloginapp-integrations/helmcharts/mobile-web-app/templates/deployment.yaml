@@ -6,7 +6,7 @@ metadata:
   labels:
     app: javalogin-app
 spec:
-  replicas: {{ .Values.deployment.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: javalogin-app
