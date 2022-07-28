@@ -91,7 +91,7 @@ pipeline {
             steps {
               dir('helmcharts') {
              sh "/usr/bin/helm package javaloginapp"
-					   sh "sudo /usr/bin/helm push-artifactory --username avardhineni7@gmail.com --password mko09ijN javaloginapp-0.0.1.tgz https://simplifieddevops.jfrog.io/artifactory/mobile-helm-local"
+	     sh "sudo /usr/bin/helm push-artifactory --username avardhineni7@gmail.com --password mko09ijN javaloginapp-0.0.1.tgz https://simplifieddevops.jfrog.io/artifactory/mobile-helm-local"
 					  }
           }
             
