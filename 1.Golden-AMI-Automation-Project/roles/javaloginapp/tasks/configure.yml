@@ -32,7 +32,7 @@
 
 - name: Rename tomcat directory
   become: yes
-  command: "mv /opt/apache-tomcat-8.5.75.zip /opt/tomcat"
+  command: "mv /opt/apache-tomcat-8.5.75.zip tomcat"
   
 - name: Add execution permission to tomcat binary
   file:
