@@ -1,6 +1,7 @@
 # Golden AMI Creation
 
 For creating Golden AMI, Packer uses base AMI and what we do manually to create Golden AMI, Packer will also do the same but in Automated way. 
+Ansible is used to do Software Automation.
 
 Packer will create an EC2 instance, 
 Log in to the EC2 instance, 
