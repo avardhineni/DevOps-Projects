@@ -13,7 +13,7 @@
 - name: Create new linux user for node app
   hosts: 159.29.1.56
   tasks:
-   - name: create linuc user
+   - name: create linux user
      user:
        name: anasadmin
        comment: ansible admin
@@ -32,7 +32,7 @@
      unarchive: 
        src: /home/anasadmin/app-1.0.0.tgz
        dest: /home/anasadmin	
-       remote_src: yes
+       remote_src: yes     // If we do not specifythis will look for tar file in local. 
    - name: Install dependencies
      npm:
        path: /home/anasadmin/package
@@ -40,9 +40,9 @@
      command:
        chdir: /home/anasadmin/package/app	
        cmd: node server	
-     async: 1000
+     async: 1000  // To run the command in the background
      poll: 0
    - name: Ensure app is running
      shell: ps aux | grep node
-     register: app_status
-   - debug: msg={{app_status.stdout_lines}}
+     register: app_status // The result of above command is stored in app_status variable.
+   - debug: msg={{app_status.stdout_lines}} // To print the results of the above command.
