@@ -1,4 +1,4 @@
-# nameOverride: iwayq-web-app
+# nameOverride: java-login-app
 
 # meta information. This data is used by operations to identify the deployed
 # artifacts
