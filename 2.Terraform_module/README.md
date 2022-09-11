@@ -7,6 +7,7 @@
 - Child modules are re-usable code. 
 
 ### Terraform Modules helps to stop creating duplicate resources within an orgranization and saves a lot of devops team time.
+Modules are like Managed Services. We do not have to code to create resources. Just provide values.
 
 
 
