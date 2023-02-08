@@ -1,0 +1,29 @@
+import jira
+import sys
+
+# Connect to Jira using the Jira Python library
+jira_instance = jira.JIRA(basic_auth=('usernameXXXX', 'passwordXXXX'), options={'server': 'https://rds-csi.atlassian.net'})
+
+# Get the build status from Jenkins
+build_status = sys.argv[1]
+
+# Get the Jira ticket key
+ticket_key = sys.argv[2]
+
+# Get the Jira ticket
+ticket = jira_instance.issue(ticket_key)
+
+# Update the ticket based on the build status
+if build_status == 'success':
+    ticket.update(fields={'Ticket_ID': 'Success'})
+elif build_status == 'failure':
+    ticket.update(fields={'Ticket_ID': 'Failure'})
+else:
+    ticket.update(fields={'Ticket_ID': 'Unknown'})
+
+print('Jira ticket {} updated with build status: {}'.format(ticket_key, build_status))
+
+
+The script connects to Jira using the Jira Python library (jira), and updates a custom field (Ticket_ID) on the ticket based on the build status (success, failure, or unknown). The build status and Jira ticket key are passed as command-line arguments to the script.
+
+In the Script you will need to install the Jira Python library (pip install jira) and replace username and password with your Jira username and password, and replace Jira URL with the URL of your Jira instance. You may also need to update the custom field ID (Ticket_ID) to match the ID of the custom field in your Jira instance.
