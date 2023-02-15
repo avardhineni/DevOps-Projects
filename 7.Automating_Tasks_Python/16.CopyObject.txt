@@ -1,0 +1,11 @@
+
+import boto3
+
+s3 = boto3.resource('s3')
+
+copy_source = {
+    'Bucket':'apexon3385',
+    'Key':'file.pdf'
+}
+
+s3.meta.client.copy(copy_source, 'apexon3385', 'copied.pdf')
