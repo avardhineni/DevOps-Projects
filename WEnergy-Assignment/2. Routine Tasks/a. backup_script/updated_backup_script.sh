@@ -4,8 +4,8 @@
 RETENTION_COUNT=${1:-8}
 
 # Set the AWS credentials and bucket/container name
-AWS_ACCESS_KEY_ID="AKIAWDTDALLRGXJKPHVM"
-AWS_SECRET_ACCESS_KEY="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"
+AWS_ACCESS_KEY_ID="XXXX"
+AWS_SECRET_ACCESS_KEY="YYYY"
 S3_BUCKET_NAME="backups-wenergy"
 
 # Create the backup directory if it doesn't exist
