@@ -21,5 +21,5 @@ packer.exe build -var-file build/variables.json build/javaloginapp.json
 ```
 In case of any errors, to debug the execution, run the below command:
 ```
-packer.exe build -debug -var-file build/variables.json build/javaloginapp.json
+packer.exe build -debug -var-file build/variables.json build/javaloginapp.jso
 ```
